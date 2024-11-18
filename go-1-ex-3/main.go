@@ -3,19 +3,35 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"time"
 )
 
 func main() {
-	var eyes = rand.Intn(5) + 1
+
+	var eyes = rand.Intn(6) + 1
 	var when = time.Now()
 
-	// TODO: use fmt.Fprintln instead!
-	fmt.Println("the dice shows", eyes, "eyes")
+	eyesFilePath := "eyes.txt"
+	diceLogFilePath := "dice.log"
 
-	// TODO: use fmt.Fprintln instead!
-	fmt.Println("the dice was rolled at", when)
+	eyesFile, err := os.Create(eyesFilePath)
+	if err != nil {
+		fmt.Println("Fehler beim Erstellen von eyes.txt:", err)
+		return
+	}
+	defer eyesFile.Close()
 
-	// TODO: how to write the output into eyes.txt and dice.log?
-	// go run ex3/main.go TODO
+	diceLogFile, err := os.Create(diceLogFilePath)
+	if err != nil {
+		fmt.Println("Fehler beim Erstellen von dice.log:", err)
+		return
+	}
+	defer diceLogFile.Close()
+
+	fmt.Fprintln(eyesFile, "The dice shows", eyes, "eyes")
+	fmt.Fprintln(diceLogFile, "The dice was rolled at", when)
+
+	fmt.Println("Die Augenzahl wurde in", eyesFilePath, "gespeichert.")
+	fmt.Println("Der Zeitpunkt wurde in", diceLogFilePath, "gespeichert.")
 }
