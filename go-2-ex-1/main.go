@@ -33,7 +33,7 @@ func main() {
 			Year:  2007,
 		},
 		NumberOfSiblings: 2,
-		ZodiacSign:       '\u2651',
+		ZodiacSign:       '\u2648',
 	}
 
 	fmt.Println("Steckbrief:", me)
